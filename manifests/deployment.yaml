@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnetapi
+  namespace: dotnetapi
+  labels:
+    app: dotnetapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dotnetapi
+  template:
+    metadata:
+      labels:
+        app: dotnetapi
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": windows
+      containers:
+        - name: dotnetapi-aks-app
+          image: dotnetapi-aks-app
+          ports:
+            - name: http
+              containerPort: 80
